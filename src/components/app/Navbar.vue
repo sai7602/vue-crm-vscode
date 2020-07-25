@@ -58,8 +58,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import imgUkraineFlag from "@/assets/svg/flag-ukraine.svg";
-import imgEnFlag from "@/assets/svg/flag-uk.svg";
 export default {
   data: () => ({
     date: new Date(),
@@ -71,14 +69,14 @@ export default {
       {
         lang: "Українська",
         value: "uk-UA",
-        dataIcon: imgUkraineFlag
+        dataIcon: require("@/assets/svg/flag-ukraine.svg"),
       },
       {
         lang: "English",
         value: "en-US",
-        dataIcon: imgEnFlag
-      }
-    ]
+        dataIcon: require("@/assets/svg/flag-uk.svg"),
+      },
+    ],
   }),
   computed: {
     name() {
@@ -88,9 +86,9 @@ export default {
       get() {
         return this.$store.getters.info.locale;
       },
-      set() {}
+      set() {},
     },
-    ...mapGetters(["info"])
+    ...mapGetters(["info"]),
   },
   methods: {
     async logout() {
@@ -101,10 +99,10 @@ export default {
     async changeLanguage() {
       try {
         await this.updateInfo({
-          locale: this.select.el.value
+          locale: this.select.el.value,
         });
       } catch (error) {}
-    }
+    },
   },
   mounted() {
     this.selected = this.info.locale;
@@ -113,7 +111,7 @@ export default {
     }, 1000);
     this.select = M.FormSelect.init(this.$refs.selectLanguage);
     this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
-      constrainWidth: true
+      constrainWidth: true,
     });
   },
   beforeDestroy() {
@@ -121,6 +119,6 @@ export default {
     if (this.dropdown && this.dropdown.destroy) {
       this.dropdown.destroy();
     }
-  }
+  },
 };
 </script>
